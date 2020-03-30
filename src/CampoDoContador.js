@@ -2,7 +2,10 @@ import React from 'react';
 
 export default class CampoDoContador extends React.Component {
   handleOnChange = event => {
-    this.props.callback(this.props.campo, event.target.value)
+    this.props.callback({
+      campo:this.props.campo,
+      dado: event.target.value
+    })
   }
 
   render() {
@@ -12,7 +15,7 @@ export default class CampoDoContador extends React.Component {
         <input
           type="number"
           value={this.props.dado}
-          onChange={this.props.callback}
+          onChange={this.handleOnChange}
         />
       </label>
     );
