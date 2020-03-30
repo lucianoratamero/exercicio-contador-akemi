@@ -1,11 +1,17 @@
 import React from 'react';
 import CampoDoContador from './CampoDoContador';
 
+
 class App extends React.Component {
-  state = {
-    inicio: 0,
-    fim: 0,
-    passo: 0,
+  constructor(props){
+    super(props);
+
+    this.state = {
+      campos: ['inicio', 'fim', 'passo'],
+      inicio: 0,
+      fim: 0,
+      passo: 0,
+    }
   }
 
   setInputData = ({ campo, dado }) => {
@@ -20,23 +26,13 @@ class App extends React.Component {
           {JSON.stringify(this.state)}
         </p>
 
-        <CampoDoContador
-          campo='inicio'
-          dado={this.state.inicio}
-          callback={this.setInputData}
-        />
-
-        <CampoDoContador
-          campo='fim'
-          dado={this.state.fim}
-          callback={this.setInputData}
-        />
-
-        <CampoDoContador
-          campo='passo'
-          dado={this.state.passo}
-          callback={this.setInputData}
-        />
+        {this.state.campos.map(campo => (
+          <CampoDoContador
+            campo={campo}
+            dado={this.state[campo]}
+            callback={this.setInputData}
+          />
+        ))}
 
         <h1>componente do Contando</h1>
 
