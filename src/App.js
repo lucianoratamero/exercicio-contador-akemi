@@ -1,26 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CampoDoContador from './CampoDoContador';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+class App extends React.Component {
+  state = {
+    inicio: 0,
+    fim: 0,
+    passo: 0,
+  }
+
+  setInputData = ({ campo, dado }) => {
+    this.setState({ [campo]: dado });
+  }
+
+  render(){
+    return (
+      <div id="app">
+        <h1>Vamos contar!</h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          {JSON.stringify(this.state)}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+        <CampoDoContador
+          campo='inicio'
+          dado={this.state.inicio}
+          callback={this.setInputData}
+        />
+
+        <CampoDoContador
+          campo='fim'
+          dado={this.state.fim}
+          callback={this.setInputData}
+        />
+
+        <CampoDoContador
+          campo='passo'
+          dado={this.state.passo}
+          callback={this.setInputData}
+        />
+
+        <h1>componente do Contando</h1>
+
+        <p>Curso do Lulu</p>
+      </div>
+    );
+  }
 }
 
 export default App;
